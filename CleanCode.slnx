@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Api/">
+    <Project Path="CleanCode.WebUI/CleanCode.WebUI.csproj" />
+  </Folder>
+  <Folder Name="/Application/">
+    <Project Path="CleanCode.Application/CleanCode.Application.csproj" />
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="CleanCode.Domain/CleanCode.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infra/">
+    <Project Path="CleanCode.Infra.Data/CleanCode.Infra.Data.csproj" />
+    <Project Path="CleanCode.Infra.IoC/CleanCode.Infra.IoC.csproj" />
+  </Folder>
+  <Folder Name="/Testes/">
+    <Project Path="CleanCode.Tests/CleanCode.Tests.csproj" />
+  </Folder>
+</Solution>
