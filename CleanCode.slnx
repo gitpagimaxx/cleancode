@@ -13,6 +13,6 @@
     <Project Path="CleanCode.Infra.IoC/CleanCode.Infra.IoC.csproj" />
   </Folder>
   <Folder Name="/Testes/">
-    <Project Path="CleanCode.Tests/CleanCode.Tests.csproj" />
+    <Project Path="CleanCode.Domain.Tests/CleanCode.Domain.Tests.csproj" />
   </Folder>
 </Solution>
