@@ -4,5 +4,5 @@ namespace CleanCode.Domain.Interfaces;
 
 public interface IProductRepository : IBaseEntity<Product>
 {
-    Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
+    Task<Product?> GetProductsByCategoryAsync(int categoryId);
 }
