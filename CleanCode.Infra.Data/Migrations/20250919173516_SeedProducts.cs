@@ -13,7 +13,7 @@ namespace CleanCode.Infra.Data.Migrations
             // criar dados para a tabela Products
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Name", "Description", "Price", "Stock", "Image", "CategoryId" },
+                columns: ["Id", "Name", "Description", "Price", "Stock", "Image", "CategoryId"],
                 values: new object[,]
                 {
                     { 1, "Smartphone", "Latest model smartphone with advanced features", 699.99m, 50, "smartphone.jpg", 1 },
@@ -34,10 +34,7 @@ namespace CleanCode.Infra.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "Products",
                 keyColumn: "Id",
-                keyValues: new object[]
-                {
-                    1, 2, 3, 4, 5, 6, 7, 8, 9
-                });
+                keyValues: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]);
         }
     }
 }

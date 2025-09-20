@@ -16,11 +16,11 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
         return product;
     }
 
-    public async Task<Product> DeleteAsync(Product product)
+    public async Task DeleteAsync(int id)
     {
-        _context.Products.Remove(product);
+        var entity = await _context.Products.FindAsync(id);
+        _context.Products.Remove(entity!);
         await _context.SaveChangesAsync();
-        return product;
     }
 
     public async Task<IEnumerable<Product>> GetAllAsync()

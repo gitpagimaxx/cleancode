@@ -16,11 +16,11 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
         return category;
     }
 
-    public async Task<Category> DeleteAsync(Category category)
+    public async Task DeleteAsync(int id)
     {
-        _context.Categories.Remove(category);
+        var category = await _context.Categories.FindAsync(id);
+        _context.Categories.Remove(category!);
         await _context.SaveChangesAsync();
-        return category;
     }
 
     public async Task<IEnumerable<Category>> GetAllAsync()

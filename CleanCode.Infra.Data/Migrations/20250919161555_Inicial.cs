@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace CleanCode.Infra.Data.Migrations
 {
     /// <inheritdoc />
@@ -51,7 +47,7 @@ namespace CleanCode.Infra.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Name" },
+                columns: ["Id", "Name"],
                 values: new object[,]
                 {
                     { 1, "Electronics" },

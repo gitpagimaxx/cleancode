@@ -3,13 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanCode.Infra.Data.Context;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
 

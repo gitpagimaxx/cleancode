@@ -1,6 +1,6 @@
-﻿namespace CleanCode.Domain.Interfaces;
+﻿namespace CleanCode.Application.Interfaces;
 
-public interface IBaseEntity<T>
+public interface IBaseService<T> where T : class
 {
     Task<IEnumerable<T>> GetAllAsync();
     Task<T?> GetByIdAsync(int id);

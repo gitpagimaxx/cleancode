@@ -44,8 +44,6 @@ public sealed class Product : Entity
         Description = description;
         Price = price;
         Stock = stock;
-        Image = image;
+        Image = image!;
     }
-
-    
 }
