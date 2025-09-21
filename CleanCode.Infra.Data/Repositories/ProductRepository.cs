@@ -9,18 +9,20 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
 {
     private readonly ApplicationDbContext _context = context;
 
-    public async Task<Product> AddAsync(Product product)
+    public async Task<Product> AddAsync(Product product, CancellationToken token)
     {
         _context.Products.Add(product);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return product;
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<Product> DeleteAsync(int id, CancellationToken token)
     {
-        var entity = await _context.Products.FindAsync(id);
+        var entity = await _context.Products.FindAsync(id, token);
         _context.Products.Remove(entity!);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
+
+        return entity!;
     }
 
     public async Task<IEnumerable<Product>> GetAllAsync()
@@ -30,18 +32,13 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
 
     public async Task<Product?> GetByIdAsync(int id)
     {
-        return await _context.Products.FindAsync(id);
-    }
-
-    public async Task<Product?> GetProductsByCategoryAsync(int id)
-    {
         return await _context.Products.Include(c => c.Category).SingleOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<Product> UpdateAsync(Product product)
+    public async Task<Product> UpdateAsync(Product product, CancellationToken token)
     {
         _context.Products.Update(product);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(token);
         return product;
     }
 }

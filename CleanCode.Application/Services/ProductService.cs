@@ -1,51 +1,71 @@
 ﻿using AutoMapper;
 using CleanCode.Application.Dtos;
 using CleanCode.Application.Interfaces;
-using CleanCode.Domain.Interfaces;
+using CleanCode.Application.Products.Commands;
+using CleanCode.Application.Products.Queries;
+using MediatR;
 
 namespace CleanCode.Application.Services;
 
 public class ProductService(
-    IProductRepository productRepository,
-    IMapper mapper) : IProductService
+    IMapper mapper,
+    IMediator mediator) : IProductService
 {
-    private readonly IProductRepository _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
     private readonly IMapper _mapper = mapper;
+    private readonly IMediator _mediator = mediator;
 
-    public Task<ProductDto> AddAsync(ProductDto entity)
+    public async Task<ProductDto> AddAsync(ProductDto entity, CancellationToken token)
     {
-        var product = _mapper.Map<Domain.Entities.Product>(entity);
-        var result = _productRepository.AddAsync(product);
-        return _mapper.Map<Task<ProductDto>>(result);
+        var entityCommand = _mapper.Map<ProductCreateCommand>(entity);
+
+        if (entityCommand == null) throw new ArgumentNullException(nameof(entityCommand));
+
+        var result = await _mediator.Send(entityCommand, token);
+
+        return _mapper.Map<ProductDto>(result);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<ProductDto> DeleteAsync(int id, CancellationToken token)
     {
-        await _productRepository.DeleteAsync(id);
+        var entityCommand = new ProductRemoveCommand(id);
+
+        if (entityCommand == null) throw new ArgumentNullException(nameof(entityCommand));
+
+        var result = await _mediator.Send(entityCommand, token);
+
+        return _mapper.Map<ProductDto>(result);
     }
 
     public async Task<IEnumerable<ProductDto>> GetAllAsync()
     {
-        var products = await _productRepository.GetAllAsync();
-        return _mapper.Map<IEnumerable<ProductDto>>(products);
+        var productsQuery = new GetProductsQuery();
+
+        if (productsQuery == null) throw new ArgumentNullException(nameof(productsQuery));
+
+        var result = await _mediator.Send(productsQuery);
+
+        return _mapper.Map<IEnumerable<ProductDto>>(result);
     }
 
     public async Task<ProductDto?> GetByIdAsync(int id)
     {
-        var product = await _productRepository.GetByIdAsync(id);
-        return _mapper.Map<ProductDto?>(product);
+        var productsQuery = new GetProductByIdQuery(id);
+
+        if (productsQuery == null) throw new ArgumentNullException(nameof(productsQuery));
+
+        var result = await _mediator.Send(productsQuery);
+
+        return _mapper.Map<ProductDto?>(result);
     }
 
-    public async Task<ProductDto?> GetProductsByCategoryAsync(int entityId)
+    public async Task<ProductDto> UpdateAsync(ProductDto entity, CancellationToken token)
     {
-        var product = await _productRepository.GetProductsByCategoryAsync(entityId);
-        return _mapper.Map<ProductDto?>(product);
-    }
+        var entityCommand = _mapper.Map<ProductUpdateCommand>(entity);
 
-    public async Task<ProductDto> UpdateAsync(ProductDto entity)
-    {
-        var product = _mapper.Map<Domain.Entities.Product>(entity);
-        var result = await _productRepository.UpdateAsync(product);
+        if (entityCommand == null) throw new ArgumentNullException(nameof(entityCommand));
+
+        var result = await _mediator.Send(entityCommand, token);
+
         return _mapper.Map<ProductDto>(result);
     }
 }

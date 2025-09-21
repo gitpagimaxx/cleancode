@@ -29,6 +29,10 @@ public static class DependencyInjection
         // AutoMapper
         services.AddAutoMapper(typeof(DomainToDTOMappingProfiler));
 
+        // MediatR
+        var handlers = AppDomain.CurrentDomain.Load("CleanCode.Application");
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(handlers));
+
         return services;
     }
 }
