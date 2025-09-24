@@ -64,7 +64,7 @@ public class CategoryService(
 
     public async Task<CategoryDto> UpdateAsync(CategoryDto entity, CancellationToken token)
     {
-        var entityCommand = _mapper.Map<ProductUpdateCommand>(entity);
+        var entityCommand = _mapper.Map<CategoryUpdateCommand>(entity);
 
         if (entityCommand == null) throw new ArgumentNullException(nameof(entityCommand));
 

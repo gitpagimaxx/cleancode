@@ -10,6 +10,6 @@ public class CategoryDto
     [Required(ErrorMessage = "The name is required")]
     [MinLength(3)]
     [MaxLength(100)]
-    [DisplayName("Name")]
+    [DisplayName("Nome da Categoria")]
     public string? Name { get; set; }
 }

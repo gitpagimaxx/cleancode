@@ -4,22 +4,19 @@ using System.Diagnostics;
 
 namespace CleanCode.WebUI.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<HomeController> _logger = logger;
 
     public IActionResult Index()
     {
+        _logger.LogInformation("Accessed Home/Index");
         return View();
     }
 
     public IActionResult Privacy()
     {
+        _logger.LogInformation("Accessed Home/Privacy");
         return View();
     }
 
