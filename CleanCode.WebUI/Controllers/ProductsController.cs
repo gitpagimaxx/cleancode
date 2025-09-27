@@ -1,10 +1,12 @@
 ﻿using CleanCode.Application.Dtos;
 using CleanCode.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CleanCode.WebUI.Controllers;
 
+[Authorize]
 public class ProductsController(
     ILogger<ProductsController> logger,
     IProductService productService,
@@ -102,6 +104,7 @@ public class ProductsController(
         return View(entity);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {

@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/Api/">
-    <Project Path="CleanCode.WebUI/CleanCode.WebUI.csproj" />
-  </Folder>
   <Folder Name="/Application/">
     <Project Path="CleanCode.Application/CleanCode.Application.csproj" />
   </Folder>
@@ -14,5 +11,8 @@
   </Folder>
   <Folder Name="/Testes/">
     <Project Path="CleanCode.Domain.Tests/CleanCode.Domain.Tests.csproj" />
+  </Folder>
+  <Folder Name="/UI/">
+    <Project Path="CleanCode.WebUI/CleanCode.WebUI.csproj" />
   </Folder>
 </Solution>

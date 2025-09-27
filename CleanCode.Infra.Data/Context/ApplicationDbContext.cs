@@ -1,10 +1,16 @@
 ﻿using CleanCode.Domain.Entities;
+using CleanCode.Infra.Data.Indentity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanCode.Infra.Data.Context;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
 
