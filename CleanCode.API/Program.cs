@@ -1,18 +1,14 @@
-using Microsoft.OpenApi.Models;
 using CleanCode.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Swagger/OpenAPI configuration
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(c =>
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanCode.API", Version = "v1" })
-);
-
 builder.Services.AddInfrastructureAPI(builder.Configuration);
+builder.Services.AddInfrastructureJWT(builder.Configuration);
+builder.Services.AddInfrastructureSwagger();
 
 var app = builder.Build();
 
@@ -24,7 +20,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStatusCodePages();
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

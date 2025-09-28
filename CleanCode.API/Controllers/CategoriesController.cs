@@ -1,11 +1,13 @@
 ﻿using CleanCode.Application.Dtos;
 using CleanCode.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanCode.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CategoriesController(ILogger<CategoriesController> logger, ICategoryService categoryService) : ControllerBase
 {
     private readonly ILogger<CategoriesController> _logger = logger;
@@ -23,7 +25,7 @@ public class CategoriesController(ILogger<CategoriesController> logger, ICategor
         return Ok(entities);
     }
 
-    [HttpGet("{id:int}", Name = "GetByIdAsync")]
+    [HttpGet("{id:int}", Name = "GetByCategoryIdAsync")]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
         var entity = await _categoryService.GetByIdAsync(id);
@@ -63,6 +65,7 @@ public class CategoriesController(ILogger<CategoriesController> logger, ICategor
             var entityUpdated = await _categoryService.UpdateAsync(entity, cancellationToken);
             return Ok(entityUpdated);
         }
+
         return BadRequest(ModelState);
     }
 

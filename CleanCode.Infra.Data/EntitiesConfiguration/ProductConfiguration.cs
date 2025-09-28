@@ -12,6 +12,5 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(t => t.Name).HasMaxLength(100).IsRequired();
         builder.Property(t => t.Description).HasMaxLength(200).IsRequired();
         builder.Property(p => p.Price).HasPrecision(10, 2);
-        builder.HasOne(t => t.Category).WithMany(c => c.Products).HasForeignKey(t => t.CategoryId);
     }
 }
