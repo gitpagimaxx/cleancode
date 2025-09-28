@@ -59,7 +59,7 @@ public class AccountController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Register() 
+    public IActionResult Register() 
     { 
         return View(); 
     }
@@ -102,7 +102,7 @@ public class AccountController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Login(string? returnUrl = null)
+    public IActionResult Login(string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = returnUrl;
         return View();

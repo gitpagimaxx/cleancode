@@ -17,7 +17,7 @@ public class SeedUserRoleInitial(UserManager<ApplicationUser> userManager, RoleM
             await _roleManager.CreateAsync(new() { Name = "User", NormalizedName = "USER" });
     }
 
-    public async void SeedUsers()
+    public void SeedUsers()
     {
         if (_userManager.FindByEmailAsync("usuario@localhost").Result == null)
         {

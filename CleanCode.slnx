@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/API/">
+    <Project Path="CleanCode.API/CleanCode.API.csproj" Id="bc8449b6-183e-4cde-a886-0c7d36fa32cc" />
+  </Folder>
   <Folder Name="/Application/">
     <Project Path="CleanCode.Application/CleanCode.Application.csproj" />
   </Folder>
